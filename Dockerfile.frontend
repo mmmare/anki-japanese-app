@@ -1,13 +1,16 @@
 # Frontend Dockerfile
-FROM node:18-alpine as builder
+FROM node:20-alpine as builder
 
 WORKDIR /app
 
 # Copy package files first for better caching
 COPY csv-to-anki-app/frontend/package*.json ./
 
-# Install all dependencies (needed for build) with legacy peer deps to handle React 19
-RUN npm ci --legacy-peer-deps
+# Remove any existing package-lock.json to avoid sync issues
+RUN rm -f package-lock.json
+
+# Install all dependencies (needed for build) and regenerate package-lock.json
+RUN npm install --legacy-peer-deps
 
 # Copy source code
 COPY csv-to-anki-app/frontend/ .

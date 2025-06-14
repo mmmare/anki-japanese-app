@@ -20,9 +20,9 @@ git pull
 chmod +x scripts/*.sh
 
 # Clear npm cache in case of any issues
-echo "Clearing any local npm cache..."
+echo "Clearing any local npm cache and lock files..."
 rm -rf csv-to-anki-app/frontend/node_modules
-rm -rf csv-to-anki-app/frontend/package-lock.json
+rm -f csv-to-anki-app/frontend/package-lock.json
 
 # Build and start with the fixed configuration
 echo "Building and starting services with React 19 fixes..."
