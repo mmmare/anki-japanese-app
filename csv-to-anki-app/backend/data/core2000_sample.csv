@@ -1,0 +1,24 @@
+#separator:tab
+#html:true
+#deck:Core 2000 Vocabulary
+Japanese	English	Reading	Example	Tags
+猫	cat	ねこ	猫が可愛いです。 (Cats are cute.)	animal noun
+犬	dog	いぬ	私は犬が好きです。 (I like dogs.)	animal noun
+本	book	ほん	彼は本を読んでいます。 (He is reading a book.)	object noun
+水	water	みず	水を飲みます。 (I drink water.)	food noun
+食べる	to eat	たべる	私はご飯を食べます。 (I eat rice.)	verb daily
+飲む	to drink	のむ	お茶を飲みませんか？ (Would you like to drink tea?)	verb daily
+走る	to run	はしる	彼は速く走ることができます。 (He can run fast.)	verb action
+話す	to speak, to talk	はなす	彼女は日本語を話します。 (She speaks Japanese.)	verb communication
+聞く	to listen, to hear	きく	音楽を聞きます。 (I listen to music.)	verb communication
+見る	to see, to look at	みる	映画を見ましょう。 (Let's watch a movie.)	verb perception
+行く	to go	いく	学校に行きます。 (I go to school.)	verb movement
+来る	to come	くる	彼は明日来ます。 (He will come tomorrow.)	verb movement
+勉強する	to study	べんきょうする	日本語を勉強しています。 (I'm studying Japanese.)	verb education
+家	house, home	いえ	私の家は大きいです。 (My house is big.)	noun building
+車	car	くるま	新しい車を買いました。 (I bought a new car.)	noun transportation
+電車	train	でんしゃ	電車で行きましょう。 (Let's go by train.)	noun transportation
+学校	school	がっこう	学校は九時に始まります。 (School starts at 9 o'clock.)	noun education
+先生	teacher	せんせい	先生は親切です。 (The teacher is kind.)	noun profession
+学生	student	がくせい	彼は学生です。 (He is a student.)	noun person
+友達	friend	ともだち	彼は私の友達です。 (He is my friend.)	noun person

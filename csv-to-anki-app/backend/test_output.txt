@@ -1,0 +1,9 @@
+#separator:tab
+#html:true
+#deck:Test Anki Format Deck
+#columns:Front	Back	Tags
+こんにちは	Hello	greeting
+ありがとう	Thank you	greeting
+さようなら	Goodbye	greeting
+はい	Yes	basic
+いいえ	No	basic

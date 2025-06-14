@@ -1,0 +1,24 @@
+#separator:tab
+#html:true
+#deck:Japanese Vocabulary Deck
+#columns:Front	Back	Tags
+こんにちは	Hello	greeting
+ありがとう	Thank you	greeting
+さようなら	Goodbye	greeting
+はい	Yes	basic
+いいえ	No	basic
+お願いします	Please	basic
+どういたしまして	You're welcome	greeting
+水	Water	noun
+猫	Cat	noun_animal
+犬	Dog	noun_animal
+本	Book	noun
+学生	Student	noun
+先生	Teacher	noun
+食べる	To eat	verb
+飲む	To drink	verb
+行く	To go	verb
+来る	To come	verb
+見る	To see/look	verb
+聞く	To listen/hear	verb
+話す	To speak	verb

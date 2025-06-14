@@ -1,0 +1,6 @@
+FastAPI
+uvicorn
+pandas
+python-multipart
+pydantic
+aiofiles
