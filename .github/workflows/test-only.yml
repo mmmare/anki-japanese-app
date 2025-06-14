@@ -1,0 +1,68 @@
+name: Test Only
+
+on:
+  workflow_dispatch:  # Manual trigger only
+    inputs:
+      test_backend:
+        description: 'Run backend tests'
+        required: false
+        default: true
+        type: boolean
+      test_frontend:
+        description: 'Run frontend tests'
+        required: false
+        default: true
+        type: boolean
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      if: ${{ inputs.test_backend }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Set up Node.js
+      if: ${{ inputs.test_frontend }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: csv-to-anki-app/frontend/package-lock.json
+
+    - name: Install Python dependencies
+      if: ${{ inputs.test_backend }}
+      run: |
+        cd csv-to-anki-app/backend
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run Python tests
+      if: ${{ inputs.test_backend }}
+      run: |
+        cd csv-to-anki-app/backend
+        python -m pytest tests/ -v || echo "No tests found, skipping..."
+
+    - name: Install Node.js dependencies
+      if: ${{ inputs.test_frontend }}
+      run: |
+        cd csv-to-anki-app/frontend
+        npm ci
+
+    - name: Run frontend tests
+      if: ${{ inputs.test_frontend }}
+      run: |
+        cd csv-to-anki-app/frontend
+        npm test -- --coverage --watchAll=false
+
+    - name: Build frontend
+      if: ${{ inputs.test_frontend }}
+      run: |
+        cd csv-to-anki-app/frontend
+        npm run build

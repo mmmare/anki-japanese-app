@@ -7,10 +7,16 @@ set -e  # Exit on any error
 
 echo "🚀 Starting Docker CI/CD Pipeline..."
 
-# Configuration
-PROJECT_DIR="/var/www/anki-japanese-app"
+# Configuration - Auto-detect project directory
+if [ -d "/var/www/anki-japanese-app" ]; then
+    PROJECT_DIR="/var/www/anki-japanese-app"
+    BACKUP_DIR="/var/backups/anki-japanese-app"
+else
+    PROJECT_DIR="$HOME/anki-japanese-app"
+    BACKUP_DIR="$HOME/anki-backups"
+fi
+
 REPO_URL="https://github.com/mmmare/anki-japanese-app.git"
-BACKUP_DIR="/var/backups/anki-japanese-app"
 BACKEND_SERVICE="anki-backend"
 FRONTEND_SERVICE="anki-frontend"
 
