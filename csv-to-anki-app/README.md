@@ -2,6 +2,8 @@
 
 A modern web application for creating enriched Anki flashcard decks from Japanese vocabulary. Features a responsive React frontend with Chakra UI and a powerful FastAPI backend with automatic enrichment capabilities.
 
+🚀 **Now with automated CI/CD deployment!** Every code update is automatically tested and deployed.
+
 ## Features
 
 - **CSV to Anki Conversion**: Easily upload CSV files with Japanese vocabulary and convert them to Anki decks
