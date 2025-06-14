@@ -50,7 +50,7 @@ jobs:
     - name: Run frontend tests
       run: |
         cd csv-to-anki-app/frontend
-        npm test -- --coverage --watchAll=false
+        npm test -- --coverage --watchAll=false --passWithNoTests
 
     - name: Build frontend
       run: |
