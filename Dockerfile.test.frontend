@@ -1,0 +1,16 @@
+# Test Dockerfile for frontend
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Copy package files
+COPY csv-to-anki-app/frontend/package*.json ./
+
+# Install dependencies including dev dependencies for testing
+RUN npm ci
+
+# Copy source code
+COPY csv-to-anki-app/frontend/ .
+
+# Default command for testing
+CMD ["npm", "test"]

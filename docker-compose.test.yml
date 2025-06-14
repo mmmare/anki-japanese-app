@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  backend-test:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    command: |
+      sh -c "
+        pip install pytest pytest-asyncio httpx &&
+        python -m pytest tests/ -v
+      "
+    volumes:
+      - ./csv-to-anki-app/backend:/app
+    environment:
+      - PYTHONPATH=/app
+
+  frontend-test:
+    build:
+      context: .
+      dockerfile: Dockerfile.test.frontend
+    command: |
+      sh -c "
+        npm ci &&
+        npm run test -- --coverage --watchAll=false &&
+        npm run build
+      "
+    volumes:
+      - ./csv-to-anki-app/frontend:/app
