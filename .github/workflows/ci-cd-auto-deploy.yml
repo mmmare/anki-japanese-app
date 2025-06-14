@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: CI/CD with VPS Deployment
 
 on:
   push:
@@ -113,7 +113,7 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' && vars.VPS_DEPLOYMENT_ENABLED == 'true'
     
     steps:
     - name: Checkout code
@@ -127,7 +127,7 @@ jobs:
         key: ${{ secrets.VPS_SSH_KEY }}
         port: ${{ secrets.VPS_PORT || 22 }}
         script: |
-          echo "🚀 Starting deployment on VPS..."
+          echo "🚀 Starting automated deployment on VPS..."
           
           # Navigate to app directory
           cd ~/anki-japanese-app || cd /var/www/anki-japanese-app || {
@@ -151,27 +151,9 @@ jobs:
           echo "🧹 Cleaning up old images..."
           docker system prune -f
           
-          # Pull latest images from registry
-          echo "📦 Pulling latest Docker images..."
-          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-          docker pull ghcr.io/${{ github.repository }}-backend:main || echo "Backend image not found, will build locally"
-          docker pull ghcr.io/${{ github.repository }}-frontend:main || echo "Frontend image not found, will build locally"
-          
-          # Deploy with fallback to local build
+          # Deploy application
           echo "🚀 Deploying application..."
-          if docker images | grep -q "ghcr.io/${{ github.repository }}"; then
-            echo "Using pre-built images from registry..."
-            # Update docker-compose to use registry images
-            cp docker-compose.yml docker-compose.yml.bak
-            sed -i 's|build:|image:|g' docker-compose.yml
-            sed -i 's|context: \.|ghcr.io/${{ github.repository }}-backend:main|g' docker-compose.yml
-            sed -i 's|dockerfile: Dockerfile.backend||g' docker-compose.yml
-            sed -i 's|dockerfile: Dockerfile.frontend|ghcr.io/${{ github.repository }}-frontend:main|g' docker-compose.yml
-            docker-compose up -d
-          else
-            echo "Building images locally..."
-            docker-compose up -d --build
-          fi
+          docker-compose up -d --build --force-recreate
           
           # Wait for services to start
           echo "⏳ Waiting for services to start..."
@@ -197,5 +179,5 @@ jobs:
           echo "📊 Final container status:"
           docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
           
-          echo "✅ Deployment completed!"
+          echo "✅ Automated deployment completed!"
           echo "🌐 App should be accessible at: http://$(curl -s ifconfig.me)"
